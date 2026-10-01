@@ -1,0 +1,493 @@
+<!DOCTYPE html>  <html lang="th">  
+<head>  
+<meta charset="UTF-8">  
+<meta name="viewport" content="width=device-width,initial-scale=1.0">  
+<title>JK MON</title>  <style>  
+*{  
+    box-sizing:border-box;  
+    margin:0;  
+    padding:0;  
+    font-family:Arial,sans-serif;  
+}  
+  
+body{  
+    min-height:100vh;  
+    background:#05080d;  
+    color:white;  
+}  
+  
+/* ================= LOGIN ================= */  
+  
+#loginPage{  
+    position:fixed;  
+    inset:0;  
+    display:flex;  
+    justify-content:center;  
+    align-items:center;  
+    background:  
+        radial-gradient(circle at center,  
+        #06304a 0%,  
+        #05080d 55%);  
+    z-index:999;  
+}  
+  
+.login-box{  
+    width:90%;  
+    max-width:400px;  
+    padding:30px 25px;  
+    background:#101419;  
+    border:2px solid #00aaff;  
+    border-radius:18px;  
+    text-align:center;  
+    box-shadow:  
+        0 0 15px #00aaff,  
+        0 0 40px rgba(0,170,255,.35);  
+}  
+  
+.logo{  
+    font-size:32px;  
+    font-weight:bold;  
+    color:#00bfff;  
+    text-shadow:0 0 15px #00aaff;  
+    margin-bottom:8px;  
+}  
+  
+.subtitle{  
+    color:#aaa;  
+    margin-bottom:25px;  
+}  
+  
+.password{  
+    width:100%;  
+    padding:14px;  
+    background:#080b0e;  
+    border:2px solid #008cff;  
+    border-radius:10px;  
+    outline:none;  
+    color:white;  
+    font-size:19px;  
+    text-align:center;  
+}  
+  
+.password:focus{  
+    box-shadow:0 0 12px #00aaff;  
+}  
+  
+.login-btn{  
+    width:100%;  
+    margin-top:16px;  
+    padding:14px;  
+    border:0;  
+    border-radius:10px;  
+    background:linear-gradient(90deg,#0077ff,#00c6ff);  
+    color:white;  
+    font-size:19px;  
+    font-weight:bold;  
+    cursor:pointer;  
+}  
+  
+.login-btn:active{  
+    transform:scale(.98);  
+}  
+  
+#error{  
+    color:#ff4040;  
+    margin-top:15px;  
+    min-height:20px;  
+}  
+  
+/* ================= PANEL ================= */  
+  
+#panelPage{  
+    display:none;  
+    padding:25px 0;  
+}  
+  
+.panel{  
+    width:94%;  
+    max-width:650px;  
+    margin:auto;  
+    background:#101010;  
+    border:3px solid #00aaff;  
+    border-radius:20px;  
+    overflow:hidden;  
+    box-shadow:  
+        0 0 12px #00aaff,  
+        0 0 35px rgba(0,170,255,.45);  
+}  
+  
+.header{  
+    height:70px;  
+    padding:0 20px;  
+    display:flex;  
+    align-items:center;  
+    justify-content:space-between;  
+    background:linear-gradient(  
+        90deg,  
+        #0077ff,  
+        #00c6ff  
+    );  
+    font-size:22px;  
+    font-weight:bold;  
+}  
+  
+.close{  
+    font-size:32px;  
+    cursor:pointer;  
+}  
+  
+.content{  
+    padding:22px 20px;  
+}  
+  
+.section{  
+    padding-bottom:22px;  
+    margin-bottom:22px;  
+    border-bottom:2px solid #242424;  
+}  
+  
+.title{  
+    color:#00b7ff;  
+    font-size:23px;  
+    font-weight:bold;  
+    margin-bottom:18px;  
+}  
+  
+.row{  
+    display:flex;  
+    justify-content:space-between;  
+    align-items:center;  
+    font-size:20px;  
+    margin:18px 0;  
+}  
+  
+/* SWITCH */  
+  
+.switch{  
+    position:relative;  
+    width:84px;  
+    height:44px;  
+}  
+  
+.switch input{  
+    display:none;  
+}  
+  
+.slider{  
+    position:absolute;  
+    inset:0;  
+    background:#30343a;  
+    border-radius:30px;  
+    cursor:pointer;  
+    transition:.3s;  
+}  
+  
+.slider:before{  
+    content:"";  
+    position:absolute;  
+    width:34px;  
+    height:34px;  
+    left:5px;  
+    top:5px;  
+    background:white;  
+    border-radius:50%;  
+    transition:.3s;  
+}  
+  
+.switch input:checked + .slider{  
+    background:#008cff;  
+    box-shadow:0 0 15px #00aaff;  
+}  
+  
+.switch input:checked + .slider:before{  
+    transform:translateX(40px);  
+}  
+  
+/* RANGE */  
+  
+input[type="range"]{  
+    width:100%;  
+    accent-color:#009dff;  
+}  
+  
+.value{  
+    text-align:right;  
+    margin-top:8px;  
+    color:#00b7ff;  
+}  
+  
+/* SELECT */  
+  
+select{  
+    width:100%;  
+    padding:12px;  
+    background:#111;  
+    color:white;  
+    border:2px solid #008cff;  
+    border-radius:10px;  
+    font-size:19px;  
+    outline:none;  
+}  
+  
+.status{  
+    text-align:center;  
+    color:#00b7ff;  
+    margin-top:10px;  
+}  
+  
+.footer{  
+    text-align:center;  
+    color:#777;  
+    padding-bottom:15px;  
+}  
+</style>  </head>  <body>  <!-- ================= LOGIN ================= -->  <div id="loginPage">  <div class="login-box">  
+
+    <div class="logo">JK MON</div>  
+
+    <div class="subtitle">  
+        JK MON PANEL  
+    </div>  
+
+    <input  
+        id="password"  
+        class="password"  
+        type="password"  
+        placeholder="กรอกรหัสผ่าน"  
+        onkeydown="enterLogin(event)"  
+    >  
+
+    <button  
+        class="login-btn"  
+        onclick="login()">  
+        เข้าสู่ระบบ  
+    </button>  
+
+    <div id="error"></div>  
+
+</div>
+
+</div>  <!-- ================= PANEL ================= -->  <div id="panelPage">  <div class="panel">  
+
+    <div class="header">  
+        <span>JK MON PANEL</span>  
+
+        <span  
+            class="close"  
+            onclick="logout()">  
+            ×  
+        </span>  
+    </div>  
+
+
+    <div class="content">  
+
+        <!-- เมนูช่วยเล็ง -->  
+        <div class="section">  
+
+            <div class="title">  
+                เมนูช่วยเล็ง  
+            </div>  
+
+            <div class="row">  
+                <span>ดูหัว</span>  
+
+                <label class="switch">  
+                    <input type="checkbox"  
+                           onchange="showStatus('ดูหัว')">  
+                    <span class="slider"></span>  
+                </label>  
+            </div>  
+
+            <div class="row">  
+                <span>ช่วยลากหัว</span>  
+
+                <label class="switch">  
+                    <input type="checkbox"  
+                           onchange="showStatus('ช่วยลากหัว')">  
+                    <span class="slider"></span>  
+                </label>  
+            </div>  
+
+        </div>  
+
+
+        <!-- ความไว -->  
+        <div class="section">  
+
+            <div class="title">  
+                ปรับความไว  
+            </div>  
+
+            <input  
+                id="speed"  
+                type="range"  
+                min="0"  
+                max="100"  
+                value="40"  
+                oninput="changeSpeed()"  
+            >  
+
+            <div class="value">  
+                ความไว :  
+                <span id="speedValue">40</span>%  
+            </div>  
+
+        </div>  
+
+
+        <!-- โหมด -->  
+        <div class="section">  
+
+            <div class="title">  
+                เลือกโหมด  
+            </div>  
+
+            <select onchange="changeMode(this.value)">  
+                <option>HEAD</option>  
+                <option>BODY</option>  
+                <option>CHEST</option>  
+                <option>CUSTOM</option>  
+            </select>  
+
+        </div>  
+
+
+        <!-- MISC -->  
+        <div class="section">  
+
+            <div class="title">  
+                MISC  
+            </div>  
+
+            <div class="row">  
+                <span>กระสุนตรง</span>  
+
+                <label class="switch">  
+                    <input type="checkbox"  
+                           onchange="showStatus('กระสุนตรง')">  
+                    <span class="slider"></span>  
+                </label>  
+            </div>  
+
+            <div class="row">  
+                <span>กันแบน</span>  
+
+                <label class="switch">  
+                    <input type="checkbox"  
+                           onchange="showStatus('กันแบน')">  
+                    <span class="slider"></span>  
+                </label>  
+            </div>  
+
+        </div>  
+
+        <div  
+            id="status"  
+            class="status">  
+            JK MON READY  
+        </div>  
+
+    </div>  
+
+    <div class="footer">  
+        JK MON X PANEL  
+    </div>  
+
+</div>
+
+</div>  <script>  
+  
+/* รหัสผ่าน */  
+const PASSWORD = "1234";  
+  
+  
+/* LOGIN */  
+function login(){  
+  
+    const password =  
+        document.getElementById("password").value;  
+  
+    const error =  
+        document.getElementById("error");  
+  
+    if(password === PASSWORD){  
+  
+        document.getElementById("loginPage")  
+            .style.display = "none";  
+  
+        document.getElementById("panelPage")  
+            .style.display = "block";  
+  
+        error.innerText = "";  
+  
+    }else{  
+  
+        error.innerText =  
+            "❌ รหัสผ่านไม่ถูกต้อง";  
+  
+        document.getElementById("password")  
+            .value = "";  
+  
+    }  
+}  
+  
+  
+/* กด Enter เพื่อเข้าสู่ระบบ */  
+function enterLogin(event){  
+  
+    if(event.key === "Enter"){  
+        login();  
+    }  
+  
+}  
+  
+  
+/* ออกจาก Panel */  
+function logout(){  
+  
+    document.getElementById("panelPage")  
+        .style.display = "none";  
+  
+    document.getElementById("loginPage")  
+        .style.display = "flex";  
+  
+    document.getElementById("password")  
+        .value = "";  
+  
+}  
+  
+  
+/* ความไว */  
+function changeSpeed(){  
+  
+    const value =  
+        document.getElementById("speed").value;  
+  
+    document.getElementById("speedValue")  
+        .innerText = value;  
+  
+}  
+  
+  
+/* เปลี่ยนโหมด */  
+function changeMode(mode){  
+  
+    document.getElementById("status")  
+        .innerText =  
+        "เลือกโหมด : " + mode;  
+  
+}  
+  
+  
+/* สถานะปุ่ม */  
+function showStatus(name){  
+  
+    document.getElementById("status")  
+        .innerText =  
+        name + " : เปลี่ยนสถานะแล้ว";  
+  
+}  
+  
+</script>  </body>  
+</html>  
+ช่วยทำอันนี้ให้เป็นเว็บไซต์ใส่ใน google chrome ให้หน่อย
